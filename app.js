@@ -23,8 +23,9 @@ app.get('/ticker/price', async (req, res) => {
         const response = await axios.get(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`);
         const price = response.data.price;
 
-        // Armazena o preço no cache por 5 minutos
-        cache.put(cacheKey, price, 300000);
+        // Armazena no cache por 5 minutos
+        cache.put(cacheKey, price, 5 * 60 * 1000);
+
         res.json({
             symbol,
             price,
